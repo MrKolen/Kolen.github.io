@@ -321,7 +321,22 @@
 		
 		
 
+	
+    <span class="leancloud_visitors" id="/2019/05/08/分享两首歌，无摘要/_visitors" data-url="/2019/05/08/分享两首歌，无摘要/" data-title="分享两首歌，无摘要">
+       	<i class="fa fa-eye"></i>
+       	热度
+        <i class="leancloud_visitors_count" id="leancloud_visitors_count">0</i>
+    </span>
+    
 
+
+
+	
+    <span class="leancloud_likes" id="/2019/05/08/分享两首歌，无摘要/_likes" data-url="/2019/05/08/分享两首歌，无摘要/" data-title="分享两首歌，无摘要" rel="unlike">
+        <i class="fa fa-heart"></i>
+        喜欢
+        <i class="leancloud_likes_count" id="leancloud_likes_count">0</i>
+    </span>
 
 	</div>
 
@@ -496,31 +511,23 @@
 	
 
 		
-
-			<!-- valine comment -->
-			<!-- show valine comment -->
-<div id="valineComment" class="comment"></div>
-
-<!-- valine`s js & css -->
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src="/plugin/comment/valine.min.js"></script>
-<link rel="stylesheet" href="/css/comment.css">
-<script>
-	if( $('#valineComment').length ) {
-		new Valine({
-			// AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
-			av: AV,
-			//使用id寻找div元素（使用class可能找不到?）
-			el: '#valineComment',
-			emoticon_url: 'https://cloud.panjunwen.com/alu',
-			emoticon_list: ["吐.png", "期待.png", "高兴.png", "吐血倒地.png", "哭泣.png", "欢呼.png"],
-			app_id: "b0Sq5vgXDcUlyeHrLpdWg49H-gzGzoHsz", //获取APP ID
-			app_key: "jCc17LyuLo4JVbL8Nz2uXqHI", //获取APP KEY
-			placeholder: "Write a Comment", //评论框占位提示文字        			
-		});
-	}
-</script>		
-
+			
+			<!-- livere comment -->
+			<!-- show livere comment -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80NDE0OC8yMDY4Mg">
+	<script type="text/javascript">
+	   (function(d, s) {
+	       var j, e = d.getElementsByTagName(s)[0];
+ 	       if (typeof LivereTower === 'function') { return; }
+ 	       j = d.createElement(s);
+	       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+	       j.async = true;
+ 	       e.parentNode.insertBefore(j, e);
+	   })(document, 'script');
+	</script>
+	<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+			
 		
 		
 	
@@ -605,6 +612,14 @@
 				参考了01 & 02进行简单的设计与实现
 -->
 
+
+
+	<script>
+		var appid = 'b0Sq5vgXDcUlyeHrLpdWg49H-gzGzoHsz',
+            appkey = 'jCc17LyuLo4JVbL8Nz2uXqHI';	  
+        AnnieLeancloud(appid, appkey);         
+	</script>
+    
 
 	
 
@@ -831,6 +846,23 @@
 		<div class="local-search-footer">
 			<div class="topN-post">				
 				
+
+   
+	<div id="topN">
+		<div class="topN-title" data-title="热门文章"></div> 
+	</div>
+	
+    <script>
+        var appid = 'b0Sq5vgXDcUlyeHrLpdWg49H-gzGzoHsz',
+            appkey = 'jCc17LyuLo4JVbL8Nz2uXqHI',
+            limitCount = 10;
+        if( $('#topN').length ){
+            AV.initialize(appid, appkey);
+            var Counter = AV.Object.extend("Counter");  
+            topNPost(Counter, limitCount);
+        }
+    </script>
+   
 								
 			</div>
 		</div>

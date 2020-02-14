@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="http://MrKolen.github.io/"/>
   <updated>2020-02-14T17:13:38.423Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>http://MrKolen.github.io/</id>
   
   <author>
     <name>✨ Kolen</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>深度学习01-文本预处理</title>
-    <link href="http://yoursite.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A001-%E6%96%87%E6%9C%AC%E9%A2%84%E5%A4%84%E7%90%86/"/>
-    <id>http://yoursite.com/2020/02/14/深度学习01-文本预处理/</id>
+    <link href="http://MrKolen.github.io/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A001-%E6%96%87%E6%9C%AC%E9%A2%84%E5%A4%84%E7%90%86/"/>
+    <id>http://MrKolen.github.io/2020/02/14/深度学习01-文本预处理/</id>
     <published>2020-02-14T13:29:36.000Z</published>
     <updated>2020-02-14T17:13:38.423Z</updated>
     
@@ -45,8 +45,8 @@
   
   <entry>
     <title>分享两首歌，无摘要</title>
-    <link href="http://yoursite.com/2019/05/08/%E5%88%86%E4%BA%AB%E4%B8%A4%E9%A6%96%E6%AD%8C%EF%BC%8C%E6%97%A0%E6%91%98%E8%A6%81/"/>
-    <id>http://yoursite.com/2019/05/08/分享两首歌，无摘要/</id>
+    <link href="http://MrKolen.github.io/2019/05/08/%E5%88%86%E4%BA%AB%E4%B8%A4%E9%A6%96%E6%AD%8C%EF%BC%8C%E6%97%A0%E6%91%98%E8%A6%81/"/>
+    <id>http://MrKolen.github.io/2019/05/08/分享两首歌，无摘要/</id>
     <published>2019-05-08T13:50:20.000Z</published>
     <updated>2019-05-08T15:00:20.571Z</updated>
     
@@ -65,14 +65,14 @@
     </summary>
     
     
-      <category term="文艺一下" scheme="http://yoursite.com/tags/%E6%96%87%E8%89%BA%E4%B8%80%E4%B8%8B/"/>
+      <category term="文艺一下" scheme="http://MrKolen.github.io/tags/%E6%96%87%E8%89%BA%E4%B8%80%E4%B8%8B/"/>
     
   </entry>
   
   <entry>
     <title>今天是个好日子</title>
-    <link href="http://yoursite.com/2019/05/08/%E4%BB%8A%E5%A4%A9%E6%98%AF%E4%B8%AA%E5%A5%BD%E6%97%A5%E5%AD%90/"/>
-    <id>http://yoursite.com/2019/05/08/今天是个好日子/</id>
+    <link href="http://MrKolen.github.io/2019/05/08/%E4%BB%8A%E5%A4%A9%E6%98%AF%E4%B8%AA%E5%A5%BD%E6%97%A5%E5%AD%90/"/>
+    <id>http://MrKolen.github.io/2019/05/08/今天是个好日子/</id>
     <published>2019-05-08T09:12:07.000Z</published>
     <updated>2019-05-08T16:52:02.004Z</updated>
     
@@ -84,12 +84,12 @@
     
     </summary>
     
-      <category term="杂记" scheme="http://yoursite.com/categories/%E6%9D%82%E8%AE%B0/"/>
+      <category term="杂记" scheme="http://MrKolen.github.io/categories/%E6%9D%82%E8%AE%B0/"/>
     
     
-      <category term="心情" scheme="http://yoursite.com/tags/%E5%BF%83%E6%83%85/"/>
+      <category term="心情" scheme="http://MrKolen.github.io/tags/%E5%BF%83%E6%83%85/"/>
     
-      <category term="建博大业" scheme="http://yoursite.com/tags/%E5%BB%BA%E5%8D%9A%E5%A4%A7%E4%B8%9A/"/>
+      <category term="建博大业" scheme="http://MrKolen.github.io/tags/%E5%BB%BA%E5%8D%9A%E5%A4%A7%E4%B8%9A/"/>
     
   </entry>
   

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://MrKolen.github.io/"/>
-  <updated>2020-02-14T17:13:38.423Z</updated>
+  <updated>2020-02-14T18:15:12.384Z</updated>
   <id>http://MrKolen.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://MrKolen.github.io/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A001-%E6%96%87%E6%9C%AC%E9%A2%84%E5%A4%84%E7%90%86/"/>
     <id>http://MrKolen.github.io/2020/02/14/深度学习01-文本预处理/</id>
     <published>2020-02-14T13:29:36.000Z</published>
-    <updated>2020-02-14T17:13:38.423Z</updated>
+    <updated>2020-02-14T18:15:12.384Z</updated>
     
     <content type="html"><![CDATA[<h1 id="简介"><a class="markdownIt-Anchor" href="#简介"></a> 简介</h1><hr><p>文本预处理通常包括四个步骤：</p><ol><li>读入文本；</li><li>分词；</li><li>建立字典，将每个词映射到一个唯一的索引；</li><li>将文本从词的序列转换为索引的序列，方便输入模型。</li></ol><h1 id="读入文本"><a class="markdownIt-Anchor" href="#读入文本"></a> 读入文本</h1><hr><p><code>strip()</code>： 去掉前/后缀的空白字符，也就是空格、制表、换行符；<br><code>lower()</code>: 把所有大写字符转换为小写；<br><code>re.sub（‘正则表达式’，‘ ’，String）</code>: 正则表达式的替换函数。将String中将与正则表达式相匹配的字符串转换为空格；<br><code>'[^a-z]+'</code>: <sup>表示“非”，</sup>a-z即为非小写字符，+表示字符串长度至少为1，所以整个表达的意思是所有的非小写字符构成非空字符串。</p><pre><code>import collectionsimport redef read_time_machine():with open('replace with target file path', 'r') as f:lines = [re.sub('[^a-z]+', ' ', line.strip().lower()) for line in f]return lines   lines = read_time_machine()print('# sentences %d' % len(lines))</code></pre><h1 id="分词"><a class="markdownIt-Anchor" href="#分词"></a> 分词</h1><hr><p><code>@param sentence</code>: 一个列表，每个列表元素都是一个句子；<br><code>@param token</code>: 选定分词级别。<code>word</code>为单词级别，将<code>sentence</code>中的每个句子按空格分割；<code>char</code>为字符级别，将<code>sentence</code>中每个字符串句子转化为列表。</p><pre><code>def tokenize(sentences, token='word'):&quot;&quot;&quot;Split sentences into word or char tokens&quot;&quot;&quot;if token == 'word':return [sentence.split(' ') for sentence in sentences]elif token == 'char':return [list(sentence) for sentence in sentences]else:print('ERROR: unkown token type '+token)tokens = tokenize(lines)tokens[0:2]</code></pre><h1 id="建立字典"><a class="markdownIt-Anchor" href="#建立字典"></a> 建立字典</h1><p>为了方便模型处理，需要将字符串转化为数字，因此需要先构建一个字典，将每个词映射到一个唯一的索引编号。</p><p>需要</p><hr><p><code>__init__</code>: 构造函数。其中<code>tokens</code>为语料库中所有的词，即‘分词’中返回的列表；<code>min_freq</code>为最小词频筛选阈值，词频小于这个数则会被剔除；<code>use_spcial_tokens</code>为标志位。</p><pre><code>class Vocab(object):def __init__(self, tokens, min_freq=0, use_special_tokens=False):counter = count_corpus(tokens)  # : self.token_freqs = list(counter.items())self.idx_to_token = []if use_special_tokens:# padding, begin of sentence, end of sentence, unknownself.pad, self.bos, self.eos, self.unk = (0, 1, 2, 3)self.idx_to_token += ['', '', '', ''] else:self.unk = 0self.idx_to_token += ['']self.idx_to_token += [token for token, freq in self.token_freqs if freq &gt;= min_freq and token not in self.idx_to_token]self.token_to_idx = dict()for idx, token in enumerate(self.idx_to_token):self.token_to_idx[token] = idxdef __len__(self):return len(self.idx_to_token)def __getitem__(self, tokens):if not isinstance(tokens, (list, tuple)):return self.token_to_idx.get(tokens, self.unk)return [self.__getitem__(token) for token in tokens]def to_tokens(self, indices):if not isinstance(indices, (list, tuple)):return self.idx_to_token[indices]return [self.idx_to_token[index] for index in indices]def count_corpus(sentences):tokens = [tk for st in sentences for tk in st]return collections.Counter(tokens)  # 返回一个字典，记录每个词的出现次数</code></pre>]]></content>
     
@@ -40,6 +40,18 @@
     
     </summary>
     
+      <category term="工程项目练习" scheme="http://MrKolen.github.io/categories/%E5%B7%A5%E7%A8%8B%E9%A1%B9%E7%9B%AE%E7%BB%83%E4%B9%A0/"/>
+    
+    
+      <category term="深度学习" scheme="http://MrKolen.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="文本信息挖掘" scheme="http://MrKolen.github.io/tags/%E6%96%87%E6%9C%AC%E4%BF%A1%E6%81%AF%E6%8C%96%E6%8E%98/"/>
+    
+      <category term="信息抽取" scheme="http://MrKolen.github.io/tags/%E4%BF%A1%E6%81%AF%E6%8A%BD%E5%8F%96/"/>
+    
+      <category term="Pytorch" scheme="http://MrKolen.github.io/tags/Pytorch/"/>
+    
+      <category term="Python" scheme="http://MrKolen.github.io/tags/Python/"/>
     
   </entry>
   
@@ -48,7 +60,7 @@
     <link href="http://MrKolen.github.io/2019/05/08/%E5%88%86%E4%BA%AB%E4%B8%A4%E9%A6%96%E6%AD%8C%EF%BC%8C%E6%97%A0%E6%91%98%E8%A6%81/"/>
     <id>http://MrKolen.github.io/2019/05/08/分享两首歌，无摘要/</id>
     <published>2019-05-08T13:50:20.000Z</published>
-    <updated>2019-05-08T15:00:20.571Z</updated>
+    <updated>2020-02-14T18:15:13.480Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a><h1 id="慢慢喜欢你"><a class="markdownIt-Anchor" href="#慢慢喜欢你"></a> 慢慢喜欢你</h1><hr><p><a href="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1557335208104&amp;di=f68b4d6f9ea2cf6d8f5fdcb07144742d&amp;imgtype=0&amp;src=http%3A%2F%2Fi1.hdslb.com%2Fbfs%2Farchive%2Fe1ebadef968d0da8a8d78fde059957040de67f4e.jpg" data-fancybox="group" data-caption class="fancybox"><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1557335208104&amp;di=f68b4d6f9ea2cf6d8f5fdcb07144742d&amp;imgtype=0&amp;src=http%3A%2F%2Fi1.hdslb.com%2Fbfs%2Farchive%2Fe1ebadef968d0da8a8d78fde059957040de67f4e.jpg" alt title></a></p><p>书里总爱写到喜出望外的傍晚</p><p>骑的单车还有他和她的对谈</p><p>女孩的白色衣裳男孩爱看她穿</p><p>好多桥段</p><p>好多都浪漫</p><p>好多人心酸</p><p>好聚好散</p><p>好多天都看不完</p><p>刚才吻了你一下你也喜欢对吗</p><p>不然怎么一直牵我的手不放</p><p>你说你好想带我回去你的家乡</p><p>绿瓦红砖</p><p>柳树和青苔</p><p>过去和现在</p><p>你说你也会这样</p><p>慢慢喜欢你</p><p>慢慢的亲密</p><p>慢慢聊自己</p><p>慢慢和你走在一起</p><p>慢慢我想配合你</p><p>慢慢把我给你</p><p>慢慢喜欢你</p><p>慢慢的回忆</p><p>慢慢的陪你慢慢的老去</p><p>因为慢慢是个最好的原因</p><p>晚餐后的甜点就点你喜欢的吧</p><p>今晚就换你去床的右边睡吧</p><p>这次旅行我还想去上次的沙滩</p><p>球鞋手表</p><p>袜子和衬衫都已经烫好</p><p>放行李箱</p><p>早上等着你起床</p><p>慢慢喜欢你</p><p>慢慢的亲密</p><p>慢慢聊自己</p><p>慢慢和你走在一起</p><p>慢慢我想配合你</p><p>慢慢把我给你</p><p>慢慢喜欢你</p><p>慢慢的回忆</p><p>慢慢的陪你慢慢的老去</p><p>因为慢慢是个最好的原因</p><p>书里总爱写到喜出望外的傍晚</p><h1 id="水星记"><a class="markdownIt-Anchor" href="#水星记"></a> 水星记</h1><hr><p><a href="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1557335625683&amp;di=e821cb34a226bbcdc9ad6d230cbb9f99&amp;imgtype=0&amp;src=http%3A%2F%2Fp1.music.126.net%2FEzcH0tkNPaJS1Q_p-oXmTQ%3D%3D%2F109951163655650082.jpg" data-fancybox="group" data-caption class="fancybox"><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1557335625683&amp;di=e821cb34a226bbcdc9ad6d230cbb9f99&amp;imgtype=0&amp;src=http%3A%2F%2Fp1.music.126.net%2FEzcH0tkNPaJS1Q_p-oXmTQ%3D%3D%2F109951163655650082.jpg" alt title></a></p><p>着迷于你眼睛</p><p>银河有迹可循</p><p>穿过时间的缝隙</p><p>它依然真实地</p><p>吸引我轨迹</p><p>这瞬眼的光景</p><p>最亲密的距离</p><p>沿着你皮肤纹理</p><p>走过曲折手臂</p><p>做个梦给你</p><p>做个梦给你</p><p>等到看你银色满际</p><p>等到分不清季节更替</p><p>才敢说沉溺</p><p>还要多远才能进入你的心</p><p>还要多久才能和你接近</p><p>咫尺远近却无法靠近的那个人</p><p>要怎么探寻</p><p>要多么幸运</p><p>才敢让你发觉你并不孤寂</p><p>当我还可以再跟你飞行</p><p>环游是无趣</p><p>至少可以</p><p>陪着你</p>]]></content>
     
@@ -74,7 +86,7 @@
     <link href="http://MrKolen.github.io/2019/05/08/%E4%BB%8A%E5%A4%A9%E6%98%AF%E4%B8%AA%E5%A5%BD%E6%97%A5%E5%AD%90/"/>
     <id>http://MrKolen.github.io/2019/05/08/今天是个好日子/</id>
     <published>2019-05-08T09:12:07.000Z</published>
-    <updated>2019-05-08T16:52:02.004Z</updated>
+    <updated>2020-02-14T18:15:20.787Z</updated>
     
     <content type="html"><![CDATA[<p>傲娇插旗.jpg</p><a id="more"></a><h1 id="收到一条来自互联网界的广播"><a class="markdownIt-Anchor" href="#收到一条来自互联网界的广播"></a> 收到一条来自互联网界的广播</h1><p>Bibibibibi…(中二线接入中，频段ID：4399—2048)…</p><blockquote><p>2019年5月8日，一名江湖代号为Kolen的菜鸡程序员，历经千辛万苦，不畏千难万阻，终于在辽阔、伟大的互联网世界打下一毫江山，插上了一面伟大的“IT—K”旗帜🚩！！！</p></blockquote><blockquote><p>这是整个互联网界压根算不存在的一步，却是这位小辣鸡🐔在其渺小而又短暂的人生历程上伟大一步！</p></blockquote><p>Emmmm…可恶的营销组织，又来推送垃圾消息</p><p>老板！换碟！</p><h1 id="定个调"><a class="markdownIt-Anchor" href="#定个调"></a> 定个调</h1><p>现在学习都提倡“要有输入输出”的，输入是起点，输出才更是重点，否则同样是一份食材，大佬们做出来的叫“夫妻肺片”，菜鸡做出来的只能叫“凉拌牛杂&quot;。扯道理多没意思，不如直接干来得痛快。于是本着对计算机学科的兴趣和好奇，充分发扬本人的探（杠）索（精）精神，搭建了这个Blog用来记录下未来在人工智能领域学习的过程。</p><blockquote><p>生活不止有眼前的代码，还有诗和远方。      ---- 反正不是鲁迅先生说的</p></blockquote><p>当然，你看我像是个只会一本正经搞技术的人嘛[手动滑稽.jpg]。我打算以后在博客中写些影评、读后感，实用有趣的技术帖、PO些自己的手残摄影，反正就是拒绝无聊，探索生活更多的可能性。欢迎大家来和我探讨哲♂学和艺术~</p><p>第一次写博客，文风和排版都很烂，大佬们路过请轻喷，就这样吧…</p>]]></content>
     

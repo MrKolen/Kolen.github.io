@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-05-08T15:00:20.571Z</updated>
+  <updated>2020-02-14T13:57:58.683Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>深度学习01-文本预处理</title>
+    <link href="http://yoursite.com/2020/02/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A001-%E6%96%87%E6%9C%AC%E9%A2%84%E5%A4%84%E7%90%86/"/>
+    <id>http://yoursite.com/2020/02/14/深度学习01-文本预处理/</id>
+    <published>2020-02-14T13:29:36.000Z</published>
+    <updated>2020-02-14T13:57:58.683Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><hr><p>文本预处理通常包括四个步骤：</p><ol><li>读入文本；</li><li>分词；</li><li>建立字典，将每个词映射到一个唯一的索引；</li><li>将文本从词的序列转换为索引的序列，方便输入模型。<h1 id="读入文本"><a href="#读入文本" class="headerlink" title="读入文本"></a>读入文本</h1></li></ol><hr><p><code>strip()</code>： 去掉前/后缀的空白字符，也就是空格、制表、换行符；<br><code>lower()</code>: 把所有大写字符转换为小写；<br><code>re.sub（‘正则表达式’，‘ ’，String）</code>: 正则表达式的替换函数。将String中将与正则表达式相匹配的字符串转换为空格；<br><code>&#39;[^a-z]+&#39;</code>: ^表示“非”，^a-z即为非小写字符，+表示字符串长度至少为1，所以整个表达的意思是所有的非小写字符构成非空字符串。</p><pre><code>import collectionsimport redef read_time_machine():    with open(&apos;replace with target file path&apos;, &apos;r&apos;) as f:        lines = [re.sub(&apos;[^a-z]+&apos;, &apos; &apos;, line.strip().lower()) for line in f]    return lineslines = read_time_machine()print(&apos;# sentences %d&apos; % len(lines))</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;hr&gt;
+&lt;p&gt;文本预处理通常包括四个步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;读入文本；&lt;/li&gt;
+&lt;li&gt;分词；&lt;/li&gt;
+&lt;li&gt;建立字典，将每个词
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>分享两首歌，无摘要</title>

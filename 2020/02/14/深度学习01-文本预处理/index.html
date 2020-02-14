@@ -1,882 +1,157 @@
-<!--
-	作者：Sariay
-	时间：2018-09-25
-	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
--->
-<!DOCTYPE html>
-<html class="html-loading">
-		
+<!DOCTYPE html><html lang="en | zh-CN |zh-TW" data-theme="light"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"><title>深度学习01-文本预处理 | Kolen's Nest</title><meta name="description" content="深度学习01-文本预处理"><meta name="author" content="✨ Kolen"><meta name="copyright" content="✨ Kolen"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin><link rel="preconnect" href="//busuanzi.ibruce.info"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="深度学习01-文本预处理"><meta name="twitter:description" content="深度学习01-文本预处理"><meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/default.png"><meta property="og:type" content="article"><meta property="og:title" content="深度学习01-文本预处理"><meta property="og:url" content="http://yoursite.com/2020/02/14/深度学习01-文本预处理/"><meta property="og:site_name" content="Kolen's Nest"><meta property="og:description" content="深度学习01-文本预处理"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/default.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>const autoChangeMode = 'false'
+var t = Cookies.get("theme");
+if (autoChangeMode == '1'){
+const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+const isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+const isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
 
-<head><meta name="generator" content="Hexo 3.8.0">
-	<meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-  <title>
-    
-      深度学习01-文本预处理 | Kolen&#39;s Nest
-    
-  </title>
-  <meta name="author" content="✨ Kolen">
-  <meta name="keywords" content>
-  <meta name="description" content>
-	<!-- favicon -->
-  <link rel="shortcut icon" href="/img/favicon.ico">
+if (t === undefined){
+  if (isLightMode) activateLightMode()
+  else if (isDarkMode) activateDarkMode()
+  else if (isNotSpecified || hasNoSupport){
+    console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+    now = new Date();
+    hour = now.getHours();
+    isNight = hour < 6 || hour >= 18
+    isNight ? activateDarkMode() : activateLightMode()
+}
+} else if (t == 'light') activateLightMode()
+else activateDarkMode()
 
-  <!-- css -->
-  <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="/css/Annie.css">
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="canonical" href="http://yoursite.com/2020/02/14/深度学习01-文本预处理/"><link rel="next" title="分享两首歌，无摘要" href="http://yoursite.com/2019/05/08/分享两首歌，无摘要/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://mrkolen.github.io/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  bookmark: {
+    title: 'Snackbar.bookmark.title',
+    message_prev: 'Press',
+    message_next: 'to bookmark this page'
+  },
+  runtime_unit: 'days',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: {"bookmark":{"title":"Snackbar.bookmark.title","message_prev":"Press","message_next":"to bookmark this page"},"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Light Mode Activated Manually","night_to_day":"Dark Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#2d3035","position":"bottom-left"},
+  baiduPush: false,
+  isHome: false,
+  isPost: true
   
-  <!-- jquery -->
-	<script src="/js/jquery.min.js"></script>
-
-  <!-- leancloud -->
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-<script src="/js/leancloud.js"></script>
-</head>
-	<body>
-		<!-- Preloader -->
-
-	<div id="preloader">
-		<div class="pre-container">
-			
-				<div class="spinner">
-					<div class="double-bounce1"></div>
-					<div class="double-bounce2"></div>
-				</div>
-						
-		</div>
-	</div>
-
-
-<!-- header -->
-<header class="fixbackground" data-img-mode="random" data-normal-src="/img/1.jpg" data-random-max="110" data-random-src="https://sariay.github.io/Random-img/">
-	<div class="mask">
-		<!-- Logo and navigation -->
-		<div class="h-header">
-			<div id="logo">
-				<a href="/">
-						
-						<img src="/img/logo.png" alt="Logo">
-					
-				</a>
-			</div>
-			
-			<div id="navigation-show">
-				<ul>
-	
-		<li class="menu-home">
-			<a href="/" class="menu-item-home">主页</a>
-		</li>
-	
-		<li class="menu-archive">
-			<a href="/archives" class="menu-item-archive">归档</a>
-		</li>
-	
-		<li class="menu-categories">
-			<a href="/categories" class="menu-item-categories">分类</a>
-		</li>
-	
-		<li class="menu-tags">
-			<a href="/tags" class="menu-item-tags">标签</a>
-		</li>
-	
-		<li class="menu-about">
-			<a href="/about" class="menu-item-about">关于</a>
-		</li>
-	
-		<li class="menu-gallery">
-			<a href="/gallery" class="menu-item-gallery">相册</a>
-		</li>
-	
-
-	
-		<li class="menu-search">
-			<a href="javascript:;" class="popup-trigger">搜索</a>
-		</li>
-	
-</ul>
-			</div>				
-		</div>
-
-		<!-- motto -->
-		<div class="h-body">	
-			
-				<p class="motto"></p>
-			
-		</div>
-		
-		<!-- others: such as time... -->			
-		<div class="h-footer">
-			<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down" aria-hidden="true"></i>
-			</a>
-
-			
-				<!-- 
-	This is only a demo, please go to "https://time.is" to set your city time! 
--->
-<style type="text/css">
-	.header-date {
-		font-size: 1.6rem;
-		color: #fff;
-		position: absolute;
-		bottom: 5px;
-		right: 1rem;
-		writing-mode: tb-rl;
-	}	
-	
-	.header-date a {
-		border-bottom: none;
-	}
-
-	@media only screen and (max-width: 768 ) {
-		.header-date {
-			font-size: 1rem;
-		}			
-	}
-</style>
-<div class="header-date">
-	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow"></a>
-	<span id="Beijing_z43d"></span>
-</div>
-<script src="//widget.time.is/zh.js"></script>
-<script>
-	time_is_widget.init({
-		Beijing_z43d:{
-			template:"DATE", 
-			date_format:"year年 monthname dnum日"
-		}
-	});
-</script>
-			
-		</div>
-	</div>
-</header>
-
-<div id="navigation-hide">
-	<!-- Progress bar -->
-	<div id="progress-bar"></div>
-
-	<!-- Progress percent -->
-	<div id="progress-percentage"><h1>0.0%</h1></div>
-
-	<div class="toc-switch"><span class="switch-button">目录</span></div>
-
-	<!-- Page title -->
-	<p>
-		
-			当前文章&nbsp;:&nbsp;《深度学习01-文本预处理》
-		
-	</p>
-
-	<!-- Nav trigger for navigation-H-->
-	<a class="nav-trigger"><span></span></a>
-</div>
-
-<!-- Navigation in div(id="navigation-H") -->
-<nav class="nav-container" id="cd-nav">
-	<div class="nav-header">
-		<h3>Navigation</h3>
-		<a href="javascript:;" class="nav-close"></a>
-	</div>
-	<div class="nav-body">
-		<ul>
-	
-		<li class="menu-home">
-			<a href="/" class="menu-item-home">主页</a>
-		</li>
-	
-		<li class="menu-archive">
-			<a href="/archives" class="menu-item-archive">归档</a>
-		</li>
-	
-		<li class="menu-categories">
-			<a href="/categories" class="menu-item-categories">分类</a>
-		</li>
-	
-		<li class="menu-tags">
-			<a href="/tags" class="menu-item-tags">标签</a>
-		</li>
-	
-		<li class="menu-about">
-			<a href="/about" class="menu-item-about">关于</a>
-		</li>
-	
-		<li class="menu-gallery">
-			<a href="/gallery" class="menu-item-gallery">相册</a>
-		</li>
-	
-
-	
-		<li class="menu-search">
-			<a href="javascript:;" class="popup-trigger">搜索</a>
-		</li>
-	
-</ul>
-	</div>
-	<div class="nav-footer">
-		<ul>
-	
-		<li>
-			<a href="https://github.com/MrKolen/" target="_blank">
-				<i class="fa fa-github"></i>
-			</a>
-		</li>
-	
-		<li>
-			<a href="https://weibo.com/5390056729/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank">
-				<i class="fa fa-weibo"></i>
-			</a>
-		</li>
-	
-		<li>
-			<a href="/atom.xml" target="_blank">
-				<i class="fa fa-rss"></i>
-			</a>
-		</li>
-			
-</ul>
-
-	</div>
-</nav>
-			
-		<!--main-->
-		<main>
-			<!--
-	时间：2018-11-17
-	描述：
-		插件名称：katelog.min.js
-		插件作者：KELEN
-		插件来源: https://github.com/KELEN/katelog
--->
-
-	
-		<div class="layout-toc">
-			<div id="layout-toc">
-				<div class="k-catelog-list" id="catelog-list" data-title="文章目录"></div>
-			</div>
-		</div>
-
-		
-		<script src="/plugin/toc/katelog.min.js"></script>
-
-		
-	 
-
-<div class="layout-post">
-	<div id="layout-post">
-	<div class="article-title">
-		<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
-		
-	<a href="/2020/02/14/深度学习01-文本预处理/" itemprop="url">
-		深度学习01-文本预处理
-	</a>
-
-	</div>
-
-	<div class="article-meta">
-		<span>
-			<i class="fa fa-calendar"></i>
-			
-
-
-	发布于
-
-	<a href="/2020/02/14/深度学习01-文本预处理/" itemprop="url">
-		<time datetime="2020-02-14T13:29:36.000Z" itemprop="datePublished">
-	  		2020-02-14
-	  </time>
-	</a>
-	&nbsp;
-
-
-
-
-
-			
-
-
-
-
-	更新于
-
-	<a href="/2020/02/14/深度学习01-文本预处理/" itemprop="url">
-		<time datetime="2020-02-14T13:29:36.000Z" itemprop="dateUpdated">
-	  		2020-02-14
-	  </time>
-	</a> 
-
-
-
-		</span>
-		<span>
-			<i class="fa fa-tags"></i>
-					
-		</span>
-		
-		
-
-	
-    <span class="leancloud_visitors" id="/2020/02/14/深度学习01-文本预处理/_visitors" data-url="/2020/02/14/深度学习01-文本预处理/" data-title="深度学习01-文本预处理">
-       	<i class="fa fa-eye"></i>
-       	热度
-        <i class="leancloud_visitors_count" id="leancloud_visitors_count">0</i>
-    </span>
-    
-
-
-
-	
-    <span class="leancloud_likes" id="/2020/02/14/深度学习01-文本预处理/_likes" data-url="/2020/02/14/深度学习01-文本预处理/" data-title="深度学习01-文本预处理" rel="unlike">
-        <i class="fa fa-heart"></i>
-        喜欢
-        <i class="leancloud_likes_count" id="leancloud_likes_count">0</i>
-    </span>
-
-	</div>
-
-	<div class="article-content" id="article-content">
-		<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><hr>
+}</script></head><body><header> <div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Kolen's Nest</a></span><span class="toggle-menu pull_right close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> List</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> Movie</span></a></li></ul></div></div></span></div></header><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">Articles</div><div class="length_num">3</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">Tags</div><div class="length_num">3</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">Categories</div><div class="length_num">1</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> List</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> Movie</span></a></li></ul></div></div></div><div id="mobile-sidebar-toc"><div class="toc_mobile_headline">Catalog</div><div class="sidebar-toc__content"><ol class="toc_mobile_items"><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#简介"><span class="toc_mobile_items-number">1.</span> <span class="toc_mobile_items-text"> 简介</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#读入文本"><span class="toc_mobile_items-number">2.</span> <span class="toc_mobile_items-text"> 读入文本</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#分词"><span class="toc_mobile_items-number">3.</span> <span class="toc_mobile_items-text"> 分词</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#建立字典"><span class="toc_mobile_items-number">4.</span> <span class="toc_mobile_items-text"> 建立字典</span></a></li></ol></div></div></div><div id="body-wrap"><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true">     </i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text"> 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#读入文本"><span class="toc-number">2.</span> <span class="toc-text"> 读入文本</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分词"><span class="toc-number">3.</span> <span class="toc-text"> 分词</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#建立字典"><span class="toc-number">4.</span> <span class="toc-text"> 建立字典</span></a></li></ol></div></div></div><main id="content-outer"><div id="top-container" style="background-image: url(https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/default.png)"><div id="post-info"><div id="post-title"><div class="posttitle">深度学习01-文本预处理</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> Created 2020-02-14<span class="post-meta__separator">|</span><i class="fa fa-history fa-fw" aria-hidden="true"></i> Updated 2020-02-15</time><div class="post-meta-wordcount"><i class="fa fa-file-word-o post-meta__icon fa-fw" aria-hidden="true"></i><span>Word count:</span><span class="word-count">621</span><span class="post-meta__separator">|</span><i class="fa fa-clock-o post-meta__icon fa-fw" aria-hidden="true"></i><span>Reading time: 2 min</span><div class="post-meta-pv-cv"><span class="post-meta__separator">|</span><span><i class="fa fa-eye post-meta__icon fa-fw" aria-hidden="true"> </i>Post View:</span><span id="busuanzi_value_page_pv"></span></div></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><h1 id="简介"><a class="markdownIt-Anchor" href="#简介"></a> 简介</h1>
+<hr>
 <p>文本预处理通常包括四个步骤：</p>
 <ol>
 <li>读入文本；</li>
 <li>分词；</li>
 <li>建立字典，将每个词映射到一个唯一的索引；</li>
-<li>将文本从词的序列转换为索引的序列，方便输入模型。<h1 id="读入文本"><a href="#读入文本" class="headerlink" title="读入文本"></a>读入文本</h1></li>
+<li>将文本从词的序列转换为索引的序列，方便输入模型。</li>
 </ol>
+<h1 id="读入文本"><a class="markdownIt-Anchor" href="#读入文本"></a> 读入文本</h1>
 <hr>
-<p><code>strip()</code>： 去掉前/后缀的空白字符，也就是空格、制表、换行符；<br><code>lower()</code>: 把所有大写字符转换为小写；<br><code>re.sub（‘正则表达式’，‘ ’，String）</code>: 正则表达式的替换函数。将String中将与正则表达式相匹配的字符串转换为空格；<br><code>&#39;[^a-z]+&#39;</code>: ^表示“非”，^a-z即为非小写字符，+表示字符串长度至少为1，所以整个表达的意思是所有的非小写字符构成非空字符串。</p>
+<p><code>strip()</code>： 去掉前/后缀的空白字符，也就是空格、制表、换行符；<br>
+<code>lower()</code>: 把所有大写字符转换为小写；<br>
+<code>re.sub（‘正则表达式’，‘ ’，String）</code>: 正则表达式的替换函数。将String中将与正则表达式相匹配的字符串转换为空格；<br>
+<code>'[^a-z]+'</code>: <sup>表示“非”，</sup>a-z即为非小写字符，+表示字符串长度至少为1，所以整个表达的意思是所有的非小写字符构成非空字符串。</p>
 <pre><code>import collections
 import re
 
 def read_time_machine():
-    with open(&apos;replace with target file path&apos;, &apos;r&apos;) as f:
-        lines = [re.sub(&apos;[^a-z]+&apos;, &apos; &apos;, line.strip().lower()) for line in f]
-    return lines
+	with open('replace with target file path', 'r') as f:
+		lines = [re.sub('[^a-z]+', ' ', line.strip().lower()) for line in f]
+	return lines
 
-
+   
 lines = read_time_machine()
-print(&apos;# sentences %d&apos; % len(lines))
-</code></pre>	
-	</div>
-	
-	<div id="current-post-cover" data-scr="/img/cart_cover.jpg"></div>
-
-	<!-- relate post, comment...-->
-	<div class="investment-container">
-		<div class="investment-header">
-			<div class="investment-title-1">
-				<div class="on">相关文章</div>
-				<div>评论</div>
-				<div>分享</div>
-			</div>
-			<div class="investment-title-2">	            
-				
-	<span>
-		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
-		
-		
-			<a href="/2019/05/08/分享两首歌，无摘要/" title="分享两首歌，无摘要" rel="next">
-				下一篇&raquo;
-			</a>
-			
-	</span>
-
-
-      		
-			</div>	
-		</div>
-		
-		<div class="investment-content">
-			<div class="investment-content-list">
-				
-
-<div class="relate-post">
-	
-		<ul>
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/05/08/分享两首歌，无摘要/" title="分享两首歌，无摘要">
-								分享两首歌，无摘要			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								五月 8日, 2019				
-							</p>
-							<p class="relate-post-content">
-								
-慢慢喜欢你
-
-书里总爱写到喜出望外的傍晚
-骑的单车还有他和她的对谈
-女孩的白色衣裳男孩爱看她穿
-好多桥段
-好多都浪漫
-好多人心酸
-好聚好散
-好多天都看不完
-刚才吻了你一下你也喜欢对吗
-不然怎么一直牵我的手不放
-你说你好想带我回去你的...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2019/05/08/分享两首歌，无摘要/" title="分享两首歌，无摘要">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="分享两首歌，无摘要">
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2019/05/08/今天是个好日子/" title="今天是个好日子">
-								今天是个好日子			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								五月 8日, 2019				
-							</p>
-							<p class="relate-post-content">
-								傲娇插旗.jpg
-
-收到一条来自互联网界的广播Bibibibibi….(中二线接入中，频段ID：4399—2048)……
-
-2019年5月8日，一名江湖代号为Kolen的菜鸡程序员，历经千辛万苦，不畏千难万阻，终于在辽阔、伟大的互联网...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2019/05/08/今天是个好日子/" title="今天是个好日子">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg" alt="今天是个好日子">
-							</a>
-						</div>
-					</li>											
-			
-			
-		</ul>
-	
-</div>	
-			</div>
-			<div class="investment-content-list">
-				<div class="layout-comment">
-
-	
-
-		
-			
-			<!-- livere comment -->
-			<!-- show livere comment -->
-<div id="lv-container" data-id="city" data-uid="MTAyMC80NDE0OC8yMDY4Mg">
-	<script type="text/javascript">
-	   (function(d, s) {
-	       var j, e = d.getElementsByTagName(s)[0];
- 	       if (typeof LivereTower === 'function') { return; }
- 	       j = d.createElement(s);
-	       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-	       j.async = true;
- 	       e.parentNode.insertBefore(j, e);
-	   })(document, 'script');
-	</script>
-	<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
-</div>
-			
-		
-		
-	
-
-</div>
-			</div>
-			<div class="investment-content-list">
-				<div class="layout-share">
-	
-	
-
-		
-
-			<!-- baiduShare share -->
-			
-
-<div class="bdsharebuttonbox">
-	<a href="#" class="bds_more" data-cmd="more"></a>
-	<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
-	<a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
-	<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-	<a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
-	<a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
-	<a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
-	<a href="#" class="bds_print" data-cmd="print" title="分享到打印"></a>
-</div>
-<script>
-	window._bd_share_config = {
-		"common": {
-			"bdSnsKey": {},
-			"bdText": "",
-			"bdMini": "2",
-			"bdMiniList": false,
-			"bdPic": "",
-			"bdStyle": "1",
-			"bdSize": "24"
-		},
-		"share": {},
-		"selectShare": {
-			"bdContainerClass": null,
-			"bdSelectMiniList": ["weixin", "sqq", "tsina", "douban", "twi", "fbook", "print"]
-		}
-	};
-	with(document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
-</script>
-
-
-	<!--
-		You can add slide style!
-   -->
-
-		
-		
-	
-</div>
-
-
-			</div>
-		</div>	
-	</div>
-	</div>
-</div>
-
-
-
-	<!-- leancloud -->
-	<!--
-	时间：2018-11-27
-	描述：
-		文章访问量：visitors
-		文章喜欢量：likes	
-		文章排行榜：topNPost
-		其他得说明：
-			01-Cookie相关的函数 
-				https://blog.csdn.net/somehow1002/article/details/78511541（Author：somehow1002）
-			02-visitors相关的函数 
-				https://blog.csdn.net/u013553529/article/details/63357382（Author：爱博客大伯）
-				https://notes.doublemine.me/2015-10-21-为NexT主题添加文章阅读量统计功能.html（Author：夏末）
-			03-topNPost相关的函数
-				https://hoxis.github.io/hexo-next-read-rank.html（Author：hoxis）
-			04-likes相关的函数，
-				参考了01 & 02进行简单的设计与实现
--->
-
-
-
-	<script>
-		var appid = 'YEvjDsUVtn2If65Vg4wiFWKr-gzGzoHsz',
-            appkey = 'ia0pmjptrDfmlPIhVCG7rUXW';	  
-        AnnieLeancloud(appid, appkey);         
-	</script>
-    
-
-	
-
-
-<!-- show math formula -->
-
-
-
-	 
-	<script src="/plugin/clipboard/clipboard.js"></script>
-	<script>
-		// Copy code !
-	    function codePreprocessing() {
-	        $("#article-content .highlight").each(function() {
-
-	            $(this).wrap('<div id="post-code"></div>');
-
-	        })
-
-	        $("#article-content #post-code").each(function() {
-
-	            $(this).prepend('<nav class="copy-nav"><span><i class="code-language"></i></span></nav>');
-
-	        })
-
-	        $("#article-content .copy-nav").each(function() {
-	            var temp = $(this).next().attr('class'),
-	                language = ((temp.length > 9) && (temp != null)) ? temp.substr(10) : "none"; //why 9? Need to check language?
-
-	            $(this).find('.code-language').text(language);
-
-	            $(this).append('<span class="copy-btn"><i class="fa fa-copy" aria-hidden="true"></i></span>');
-
-	        });
-	    }
-
-		function codeCopy() {
-		    $('#article-content #post-code').each(function(i) {
-		        var codeCopyId = 'codeCopy-' + i;
-
-		        var codeNode = $(this).find('.code'),
-		            copyButton = $(this).find('.copy-btn');
-
-		        codeNode.attr('id', codeCopyId);
-		        copyButton.attr('data-clipboard-target-id', codeCopyId);
-		    })
-
-		    
-			var clipboard = new ClipboardJS('.copy-btn', {
-					target: function(trigger) {
-						return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
-					}
-		      	});
-
-			//pure js
-			function showTooltip(elem, msg) {		   
-				elem.setAttribute('aria-label', msg);
-				elem.setAttribute('class', 'copy-btn copy-status');
-				setTimeout(function() {
-					elem.setAttribute('class', 'copy-btn');
-				}, 2000);
-			}
-
-			clipboard.on('success', function(e) {
-			    e.clearSelection();
-			    console.info('Action:', e.action);		   
-			    console.info('Trigger:', e.trigger);
-			    showTooltip(e.trigger, 'Copied!');
-			    
-			});
-			clipboard.on('error', function(e) {
-			    console.error('Action:', e.action);
-			    console.error('Trigger:', e.trigger);
-			});
-		
-
-		}
-
-		if ($('.layout-post').length) {
-		    codePreprocessing();
-		    codeCopy();
-		} 
-	</script>
-
-
-
-
-
-<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
-<script src="/plugin/fancybox/jquery.fancybox.js"></script>
-
-<script type="text/javascript">
-	var titleID = $('.article-title a'),
-		imageID = $('.article-content img'),
-		videoID = $('.article-content video');
-
-	var postTitle = titleID.text() ? titleID.text() : "No post title!";
-
-	imageID.each(function() {
-		var imgPath = $(this).attr('src'),
-			imgTitle = $(this).attr('alt') ? $(this).attr('alt') : "No image description!";
-
-		//给每个匹配的<img>元素打包, 即添加父元素<a>
-		$(this).wrap('<a data-fancybox="gallery" data-caption=" 《 ' + postTitle + ' 》 ' + imgTitle + ' "  href=" ' + imgPath + ' "> </a>');
-	});
-
-	videoID.each(function() {
-		var videoPath = $(this).attr('src');
-
-		//给每个匹配的<img>元素打包, 即添加父元素<a>
-		$(this).wrap('<a data-fancybox href=" ' + videoPath + ' "> </a>');
-	});
-	//TODO：支持html5 video
-
-	if($('#layout-post').length) {
-		$('[data-fancybox="gallery"]').fancybox({
-			loop: true,
-			buttons: [
-				"zoom",
-				"share",
-				"slideShow",
-				"fullScreen",
-				//"download",
-				"thumbs",
-				"close"
-			],
-			protect: false
-		});
-	}
-</script>
-		</main>
-
-		<!--footer-->
-		<footer>
-	<div class="social">
-		<ul>
-	
-		<li>
-			<a href="https://github.com/MrKolen/" target="_blank">
-				<i class="fa fa-github"></i>
-			</a>
-		</li>
-	
-		<li>
-			<a href="https://weibo.com/5390056729/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank">
-				<i class="fa fa-weibo"></i>
-			</a>
-		</li>
-	
-		<li>
-			<a href="/atom.xml" target="_blank">
-				<i class="fa fa-rss"></i>
-			</a>
-		</li>
-			
-</ul>
-
-	</div>
-		
-	<div class="copyright">
-		<p>
-			 
-				&copy;2019 - 2020, content by ✨ Kolen. All Rights Reserved.
-			
-			
-			
-
-	<!-- busuanzi -->
-	<!-- busuanzi -->
-
-		
-	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-	
-
-		<span id="busuanzi_container_page_pv">
-	  		本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-		</span>
-
-	
-
-
-
-
-		</p>
-		<p>
-			<a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> Theme <a href="https://github.com/Sariay/hexo-theme-Annie" title="Annie" target="_blank" rel="noopener">Annie</a> by Sariay.
-			<a href="javascript:zh_tran('s');" class="zh_click" id="zh_click_s">简体</a> 
-			<a href="javascript:zh_tran('t');" class="zh_click" id="zh_click_t">繁體</a>				
-		</p>
-	</div>		
-</footer>
-		
-	<!-- set '1' to show motto in all pages! -->
-
-	<script src="/plugin/motto/motto.js"></script>
-	
-	<script type="text/javascript">
-		$(".motto").html( getMingYanContent() );
-	</script>	
-
-
-
-
-	<!--
-	时间：2018-10-3
-	描述：
-		插件名称：hexo-generator-search-zip
-		插件来源: https://github.com/SuperKieran/hexo-generator-search-zip
-		代码参考：https://github.com/SuperKieran/TKL/blob/master/layout/_partial/search.ejs(Include: js & css)	
--->
-<div class="popup search-popup local-search-popup">
-	<div class="local-search-container">
-		<span class="popup-btn-close">
-      		ESC
-   		</span>
-		<div class="local-search-header">
-			<div class="input-prompt">				
-			</div>
-			<input autocomplete="off" placeholder="Search..." type="text" id="local-search-input">
-		</div>
-		<div class="local-search-body">
-			<div id="local-search-output"></div>
-		</div>
-		<div class="local-search-footer">
-			<div class="topN-post">				
-				
-
-   
-	<div id="topN">
-		<div class="topN-title" data-title="热门文章"></div> 
-	</div>
-	
-    <script>
-        var appid = 'YEvjDsUVtn2If65Vg4wiFWKr-gzGzoHsz',
-            appkey = 'ia0pmjptrDfmlPIhVCG7rUXW',
-            limitCount = 10;
-        if( $('#topN').length ){
-            AV.initialize(appid, appkey);
-            var Counter = AV.Object.extend("Counter");  
-            topNPost(Counter, limitCount);
-        }
-    </script>
-   
-								
-			</div>
-		</div>
-	</div>
-</div>
-
-<script src="/plugin/search/ziploader.js"></script>
-<script src="/plugin/search/search.js"></script>
-
-<script type="text/javascript">
-	var search_path = 'search.json',
-		zip_Path = '/search.zip',
-		version_Path = '/searchVersion.txt',
-		input_Trigger = 'auto',
-		top_N = '2';
-
-	themeLocalSearch({
-		search_path, 
-		zip_Path, 
-		version_Path, 
-		input_Trigger, 
-		top_N
-	});
-</script>
-
-
-<!-- love effect -->
-
-	<script src="/plugin/love/love.js"></script>
-
-
-<!-- back to top -->
-
-	
-	<div id="totop">
-  		<a href="javascript:;" name="TOTOP" class="fa fa-arrow-up"></a>
-	</div>
-
-
-
-
-<!-- site analysis -->
-
-
-	<!-- site-analysis -->
-	
-	
-	
-	
-	
- 
-
-<script src="/plugin/vibrant/vibrant.js"></script>
-<script src="/plugin/chinese/chinese.js"></script>
-<script src="/plugin/imgLazyLoader/yall.min.js"></script>
-<script src="/plugin/imgResize/jquery.resizeimagetoparent.min.js"></script>
-<script src="/plugin/nicescroll/jquery.nicescroll.js"></script>
-<script src="/js/resizediv.js"></script>
-<script src="/js/main.js"></script>
-	</body>	
-</html>
+print('# sentences %d' % len(lines))
+</code></pre>
+<h1 id="分词"><a class="markdownIt-Anchor" href="#分词"></a> 分词</h1>
+<hr>
+<p><code>@param sentence</code>: 一个列表，每个列表元素都是一个句子；<br>
+<code>@param token</code>: 选定分词级别。<code>word</code>为单词级别，将<code>sentence</code>中的每个句子按空格分割；<code>char</code>为字符级别，将<code>sentence</code>中每个字符串句子转化为列表。</p>
+<pre><code>def tokenize(sentences, token='word'):
+	&quot;&quot;&quot;Split sentences into word or char tokens&quot;&quot;&quot;
+	if token == 'word':
+		return [sentence.split(' ') for sentence in sentences]
+	elif token == 'char':
+		return [list(sentence) for sentence in sentences]
+	else:
+		print('ERROR: unkown token type '+token)
+
+tokens = tokenize(lines)
+tokens[0:2]
+</code></pre>
+<h1 id="建立字典"><a class="markdownIt-Anchor" href="#建立字典"></a> 建立字典</h1>
+<p>为了方便模型处理，需要将字符串转化为数字，因此需要先构建一个字典，将每个词映射到一个唯一的索引编号。</p>
+<p>需要</p>
+<hr>
+<p><code>__init__</code>: 构造函数。其中<code>tokens</code>为语料库中所有的词，即‘分词’中返回的列表；<code>min_freq</code>为最小词频筛选阈值，词频小于这个数则会被剔除；<code>use_spcial_tokens</code>为标志位。</p>
+<pre><code>class Vocab(object):
+	def __init__(self, tokens, min_freq=0, use_special_tokens=False):
+		counter = count_corpus(tokens)  # : 
+		self.token_freqs = list(counter.items())
+		self.idx_to_token = []
+		if use_special_tokens:
+			# padding, begin of sentence, end of sentence, unknown
+			self.pad, self.bos, self.eos, self.unk = (0, 1, 2, 3)
+			self.idx_to_token += ['', '', '', '']
+		 else:
+			self.unk = 0
+			self.idx_to_token += ['']
+		self.idx_to_token += [token for token, freq in self.token_freqs 
+				if freq &gt;= min_freq and token not in self.idx_to_token]
+		self.token_to_idx = dict()
+		for idx, token in enumerate(self.idx_to_token):
+			self.token_to_idx[token] = idx
+
+	def __len__(self):
+		return len(self.idx_to_token)
+
+		def __getitem__(self, tokens):
+			if not isinstance(tokens, (list, tuple)):
+				return self.token_to_idx.get(tokens, self.unk)
+			return [self.__getitem__(token) for token in tokens]
+
+	def to_tokens(self, indices):
+		if not isinstance(indices, (list, tuple)):
+			return self.idx_to_token[indices]
+		return [self.idx_to_token[index] for index in indices]
+
+	def count_corpus(sentences):
+		tokens = [tk for st in sentences for tk in st]
+		return collections.Counter(tokens)  # 返回一个字典，记录每个词的出现次数</code></pre>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">✨ Kolen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2020/02/14/深度学习01-文本预处理/">http://yoursite.com/2020/02/14/深度学习01-文本预处理/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/default.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> Donate<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/wechat.png" alt="微信"><div class="post-qr-code__desc">微信</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="next-post pull-full"><a href="/2019/05/08/分享两首歌，无摘要/"><img class="next_cover lazyload" data-src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/default.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">Next Post</div><div class="next_info"><span>分享两首歌，无摘要</span></div></a></div></nav></div></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2020 By ✨ Kolen</div><div class="framework-info"><span>Driven </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="Read Mode"></i><i class="fa fa-plus" id="font_plus" title="Increase font size"></i><i class="fa fa-minus" id="font_minus" title="Decrease font size"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="Traditional Chinese and Simplified Chinese Conversion" target="_self">简</a><i class="darkmode fa fa-moon-o" id="darkmode" title="Dark Mode"></i></div><div id="rightside-config-show"><div id="rightside_config" title="Setting"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-list-ul close" id="mobile-toc-button" title="Table of Contents" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="Back to top" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script id="canvas_nest" color="0,0,255" opacity="0.7" zindex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/js/canvas-nest.js"></script><script src="https://cdn.jsdelivr.net/npm/activate-power-mode/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true; 
+document.body.addEventListener('input', POWERMODE);
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js" async></script></body></html>

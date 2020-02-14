@@ -1,365 +1,90 @@
-<!--
-	作者：Sariay
-	时间：2018-09-25
-	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
--->
-<!DOCTYPE html>
-<html class="html-loading">
-		
+<!DOCTYPE html><html lang="en | zh-CN |zh-TW" data-theme="light"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"><title>Kolen's Nest</title><meta name="description"><meta name="author" content="✨ Kolen"><meta name="copyright" content="✨ Kolen"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin><link rel="preconnect" href="//busuanzi.ibruce.info"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Kolen's Nest"><meta name="twitter:description"><meta name="twitter:image" content="http://yoursite.com/img/avatar.png"><meta property="og:type" content="website"><meta property="og:title" content="Kolen's Nest"><meta property="og:url" content="http://yoursite.com/"><meta property="og:site_name" content="Kolen's Nest"><meta property="og:description"><meta property="og:image" content="http://yoursite.com/img/avatar.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>const autoChangeMode = 'false'
+var t = Cookies.get("theme");
+if (autoChangeMode == '1'){
+const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+const isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+const isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
 
-<head><meta name="generator" content="Hexo 3.8.0">
-	<meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-  <title>
-    
-      Kolen&#39;s Nest
-    
-  </title>
-  <meta name="author" content="✨ Kolen">
-  <meta name="keywords" content>
-  <meta name="description" content>
-	<!-- favicon -->
-  <link rel="shortcut icon" href="/img/favicon.ico">
+if (t === undefined){
+  if (isLightMode) activateLightMode()
+  else if (isDarkMode) activateDarkMode()
+  else if (isNotSpecified || hasNoSupport){
+    console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+    now = new Date();
+    hour = now.getHours();
+    isNight = hour < 6 || hour >= 18
+    isNight ? activateDarkMode() : activateLightMode()
+}
+} else if (t == 'light') activateLightMode()
+else activateDarkMode()
 
-  <!-- css -->
-  <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="/css/Annie.css">
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="canonical" href="http://yoursite.com/"><link rel="preload" href="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/index.jpg" as="image"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://mrkolen.github.io/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  bookmark: {
+    title: 'Snackbar.bookmark.title',
+    message_prev: 'Press',
+    message_next: 'to bookmark this page'
+  },
+  runtime_unit: 'days',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: {"bookmark":{"title":"Snackbar.bookmark.title","message_prev":"Press","message_next":"to bookmark this page"},"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Light Mode Activated Manually","night_to_day":"Dark Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#2d3035","position":"bottom-left"},
+  baiduPush: false,
+  isHome: true,
+  isPost: false
   
-  <!-- jquery -->
-	<script src="/js/jquery.min.js"></script>
+}</script></head><body><header> <div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Kolen's Nest</a></span><span class="toggle-menu pull_right close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> List</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> Movie</span></a></li></ul></div></div></span></div></header><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">Articles</div><div class="length_num">3</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">Tags</div><div class="length_num">3</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">Categories</div><div class="length_num">1</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> List</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> Movie</span></a></li></ul></div></div></div></div><div id="body-wrap"><nav class="full_page" id="nav" style="background-image: url(https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/index.jpg)"><div id="site-info"><div id="site-title"><span class="blogtitle">Kolen's Nest</span></div><div id="site-sub-title"><span class="subtitle"></span></div><div id="site-social-icons"><a class="social-icon" href="https://github.com/MrKolen" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a><a class="social-icon" href="wujifan_hopeful@163.com" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a><a class="social-icon" href="/atom.xml" target="_blank"><i class="fa fa-rss" aria-hidden="true"></i></a></div></div><div class="scroll-down"><i class="fa fa-angle-down scroll-down-effects"></i></div></nav><main id="content-outer"><div class="layout_page" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item article-container"><div class="post_cover left_radius"><a href="/2020/02/14/深度学习01-文本预处理/" title="深度学习01-文本预处理"><img class="post_bg lazyload" data-src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/default.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="深度学习01-文本预处理"></a></div><div class="recent-post-info">  <a class="article-title" href="/2020/02/14/深度学习01-文本预处理/" title="深度学习01-文本预处理">深度学习01-文本预处理</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-14</time><div class="content"> 简介
 
-  <!-- leancloud -->
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-<script src="/js/leancloud.js"></script>
-</head>
-	<body>
-		<!-- Preloader -->
-
-	<div id="preloader">
-		<div class="pre-container">
-			
-				<div class="spinner">
-					<div class="double-bounce1"></div>
-					<div class="double-bounce2"></div>
-				</div>
-						
-		</div>
-	</div>
-
-
-<!-- header -->
-<header class="fixbackground" data-img-mode="random" data-normal-src="/img/1.jpg" data-random-max="110" data-random-src="https://sariay.github.io/Random-img/">
-	<div class="mask">
-		<!-- Logo and navigation -->
-		<div class="h-header">
-			<div id="logo">
-				<a href="/">
-						
-						<img src="/img/logo.png" alt="Logo">
-					
-				</a>
-			</div>
-			
-			<div id="navigation-show">
-				<ul>
-	
-		<li class="menu-home">
-			<a href="/" class="menu-item-home">主页</a>
-		</li>
-	
-		<li class="menu-archive">
-			<a href="/archives" class="menu-item-archive">归档</a>
-		</li>
-	
-		<li class="menu-categories">
-			<a href="/categories" class="menu-item-categories">分类</a>
-		</li>
-	
-		<li class="menu-tags">
-			<a href="/tags" class="menu-item-tags">标签</a>
-		</li>
-	
-		<li class="menu-about">
-			<a href="/about" class="menu-item-about">关于</a>
-		</li>
-	
-		<li class="menu-gallery">
-			<a href="/gallery" class="menu-item-gallery">相册</a>
-		</li>
-	
-
-	
-		<li class="menu-search">
-			<a href="javascript:;" class="popup-trigger">搜索</a>
-		</li>
-	
-</ul>
-			</div>				
-		</div>
-
-		<!-- motto -->
-		<div class="h-body">	
-			
-				<p class="motto"></p>
-			
-		</div>
-		
-		<!-- others: such as time... -->			
-		<div class="h-footer">
-			<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down" aria-hidden="true"></i>
-			</a>
-
-			
-				<!-- 
-	This is only a demo, please go to "https://time.is" to set your city time! 
--->
-<style type="text/css">
-	.header-date {
-		font-size: 1.6rem;
-		color: #fff;
-		position: absolute;
-		bottom: 5px;
-		right: 1rem;
-		writing-mode: tb-rl;
-	}	
-	
-	.header-date a {
-		border-bottom: none;
-	}
-
-	@media only screen and (max-width: 768 ) {
-		.header-date {
-			font-size: 1rem;
-		}			
-	}
-</style>
-<div class="header-date">
-	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow"></a>
-	<span id="Beijing_z43d"></span>
-</div>
-<script src="//widget.time.is/zh.js"></script>
-<script>
-	time_is_widget.init({
-		Beijing_z43d:{
-			template:"DATE", 
-			date_format:"year年 monthname dnum日"
-		}
-	});
-</script>
-			
-		</div>
-	</div>
-</header>
-
-<div id="navigation-hide">
-	<!-- Progress bar -->
-	<div id="progress-bar"></div>
-
-	<!-- Progress percent -->
-	<div id="progress-percentage"><h1>0.0%</h1></div>
-
-	<div class="toc-switch"><span class="switch-button">目录</span></div>
-
-	<!-- Page title -->
-	<p>
-		
-			主页
-		
-	</p>
-
-	<!-- Nav trigger for navigation-H-->
-	<a class="nav-trigger"><span></span></a>
-</div>
-
-<!-- Navigation in div(id="navigation-H") -->
-<nav class="nav-container" id="cd-nav">
-	<div class="nav-header">
-		<h3>Navigation</h3>
-		<a href="javascript:;" class="nav-close"></a>
-	</div>
-	<div class="nav-body">
-		<ul>
-	
-		<li class="menu-home">
-			<a href="/" class="menu-item-home">主页</a>
-		</li>
-	
-		<li class="menu-archive">
-			<a href="/archives" class="menu-item-archive">归档</a>
-		</li>
-	
-		<li class="menu-categories">
-			<a href="/categories" class="menu-item-categories">分类</a>
-		</li>
-	
-		<li class="menu-tags">
-			<a href="/tags" class="menu-item-tags">标签</a>
-		</li>
-	
-		<li class="menu-about">
-			<a href="/about" class="menu-item-about">关于</a>
-		</li>
-	
-		<li class="menu-gallery">
-			<a href="/gallery" class="menu-item-gallery">相册</a>
-		</li>
-	
-
-	
-		<li class="menu-search">
-			<a href="javascript:;" class="popup-trigger">搜索</a>
-		</li>
-	
-</ul>
-	</div>
-	<div class="nav-footer">
-		<ul>
-	
-		<li>
-			<a href="https://github.com/MrKolen/" target="_blank">
-				<i class="fa fa-github"></i>
-			</a>
-		</li>
-	
-		<li>
-			<a href="https://weibo.com/5390056729/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank">
-				<i class="fa fa-weibo"></i>
-			</a>
-		</li>
-	
-		<li>
-			<a href="/atom.xml" target="_blank">
-				<i class="fa fa-rss"></i>
-			</a>
-		</li>
-			
-</ul>
-
-	</div>
-</nav>
-			
-		<!--main-->
-		<main>
-			
-
-
-
-	<!--cart style-->
-	<div class="layout-cart">
-	<div id="layout-cart">
-		
-		<div class="post" id="post">
-			<a class="post-cover" href="/2020/02/14/深度学习01-文本预处理/" title=" 深度学习01-文本预处理 ">
-				
-				<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg">
-			</a>
-
-			<div class="post-text">
-				<p class="post-time">
-					二月 14日, 2020
-				</p>	
-				<h3 class="post-title" id="post-title-index">
-					<a href="/2020/02/14/深度学习01-文本预处理/" title="深度学习01-文本预处理">
-						<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
-						
-	<a href="/2020/02/14/深度学习01-文本预处理/" itemprop="url">
-		深度学习01-文本预处理
-	</a>
-
-					</a>
-				</h3>
-				<p class="post-content">
-					
-						简介
 文本预处理通常包括四个步骤：
 
 读入文本；
 分词；
 建立字典，将每个词映射到一个唯一的索引；
-将文本从词的序列转换为索引的序列，方便输入模型。读入文...
-					
-				</p>
-				<p class="post-meta">
-					
+将文本从词的序列转换为索引的序列，方便输入模型。
 
-	
-    <span class="leancloud_visitors" id="/2020/02/14/深度学习01-文本预处理/_visitors" data-url="/2020/02/14/深度学习01-文本预处理/" data-title="深度学习01-文本预处理">
-       	<i class="fa fa-eye"></i>
-       	热度
-        <i class="leancloud_visitors_count" id="leancloud_visitors_count">0</i>
-    </span>
-    
+ 读入文本
 
+strip()： 去掉前/后缀的空白字符，也就是空格、制表、换行符；
+lower(): 把所有大写字符转换为小写；
+re.sub（ ...</div></div></div><div class="recent-post-item article-container"><div class="post_cover right_radius"><a href="/2019/05/08/分享两首歌，无摘要/" title="分享两首歌，无摘要"><img class="post_bg lazyload" data-src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/default.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="分享两首歌，无摘要"></a></div><div class="recent-post-info">  <a class="article-title" href="/2019/05/08/分享两首歌，无摘要/" title="分享两首歌，无摘要">分享两首歌，无摘要</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-05-08</time><div class="content">
+ 慢慢喜欢你
 
-
-	
-    <span class="leancloud_likes" id="/2020/02/14/深度学习01-文本预处理/_likes" data-url="/2020/02/14/深度学习01-文本预处理/" data-title="深度学习01-文本预处理" rel="unlike">
-        <i class="fa fa-heart"></i>
-        喜欢
-        <i class="leancloud_likes_count" id="leancloud_likes_count">0</i>
-    </span>
-
-					
-
-	<!-- leancloud -->
-	<!--
-	时间：2018-11-27
-	描述：
-		文章访问量：visitors
-		文章喜欢量：likes	
-		文章排行榜：topNPost
-		其他得说明：
-			01-Cookie相关的函数 
-				https://blog.csdn.net/somehow1002/article/details/78511541（Author：somehow1002）
-			02-visitors相关的函数 
-				https://blog.csdn.net/u013553529/article/details/63357382（Author：爱博客大伯）
-				https://notes.doublemine.me/2015-10-21-为NexT主题添加文章阅读量统计功能.html（Author：夏末）
-			03-topNPost相关的函数
-				https://hoxis.github.io/hexo-next-read-rank.html（Author：hoxis）
-			04-likes相关的函数，
-				参考了01 & 02进行简单的设计与实现
--->
-
-
-
-	<script>
-		var appid = 'YEvjDsUVtn2If65Vg4wiFWKr-gzGzoHsz',
-            appkey = 'ia0pmjptrDfmlPIhVCG7rUXW';	  
-        AnnieLeancloud(appid, appkey);         
-	</script>
-    
-
-	
-
-				</p>
-			</div>
-		</div>
-		
-		<div class="post" id="post">
-			<a class="post-cover" href="/2019/05/08/分享两首歌，无摘要/" title=" 分享两首歌，无摘要 ">
-				
-				<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg">
-			</a>
-
-			<div class="post-text">
-				<p class="post-time">
-					五月 8日, 2019
-				</p>	
-				<h3 class="post-title" id="post-title-index">
-					<a href="/2019/05/08/分享两首歌，无摘要/" title="分享两首歌，无摘要">
-						<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
-						
-	<a href="/2019/05/08/分享两首歌，无摘要/" itemprop="url">
-		分享两首歌，无摘要
-	</a>
-
-					</a>
-				</h3>
-				<p class="post-content">
-					
-						
-慢慢喜欢你
 
 书里总爱写到喜出望外的傍晚
 骑的单车还有他和她的对谈
@@ -368,337 +93,29 @@
 好多都浪漫
 好多人心酸
 好聚好散
-好多天都看不...
-					
-				</p>
-				<p class="post-meta">
-					
+好多天都看不完
+刚才吻了你一下你也喜欢对吗
+不然怎么一直牵我的手不放
+你说你好想带我回去你的家乡
+绿瓦红砖
+柳树和青苔
+过去和现在
+你说你也会这样
+慢慢喜 ...</div></div></div><div class="recent-post-item article-container"><div class="post_cover left_radius"><a href="/2019/05/08/今天是个好日子/" title="今天是个好日子"><img class="post_bg lazyload" data-src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/default.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="今天是个好日子"></a></div><div class="recent-post-info">  <a class="article-title" href="/2019/05/08/今天是个好日子/" title="今天是个好日子">今天是个好日子</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-05-08</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/杂记/">杂记</a></span><div class="content">傲娇插旗.jpg
 
-	
-    <span class="leancloud_visitors" id="/2019/05/08/分享两首歌，无摘要/_visitors" data-url="/2019/05/08/分享两首歌，无摘要/" data-title="分享两首歌，无摘要">
-       	<i class="fa fa-eye"></i>
-       	热度
-        <i class="leancloud_visitors_count" id="leancloud_visitors_count">0</i>
-    </span>
-    
+ 收到一条来自互联网界的广播
+Bibibibibi…(中二线接入中，频段ID：4399—2048)…
 
-
-
-	
-    <span class="leancloud_likes" id="/2019/05/08/分享两首歌，无摘要/_likes" data-url="/2019/05/08/分享两首歌，无摘要/" data-title="分享两首歌，无摘要" rel="unlike">
-        <i class="fa fa-heart"></i>
-        喜欢
-        <i class="leancloud_likes_count" id="leancloud_likes_count">0</i>
-    </span>
-
-					
-
-	<!-- leancloud -->
-	<!--
-	时间：2018-11-27
-	描述：
-		文章访问量：visitors
-		文章喜欢量：likes	
-		文章排行榜：topNPost
-		其他得说明：
-			01-Cookie相关的函数 
-				https://blog.csdn.net/somehow1002/article/details/78511541（Author：somehow1002）
-			02-visitors相关的函数 
-				https://blog.csdn.net/u013553529/article/details/63357382（Author：爱博客大伯）
-				https://notes.doublemine.me/2015-10-21-为NexT主题添加文章阅读量统计功能.html（Author：夏末）
-			03-topNPost相关的函数
-				https://hoxis.github.io/hexo-next-read-rank.html（Author：hoxis）
-			04-likes相关的函数，
-				参考了01 & 02进行简单的设计与实现
--->
+2019年5月8日，一名江湖代号为Kolen的菜鸡程序员，历经千辛万苦，不畏千难万阻，终于在辽阔、伟大的互联网世界打下一毫江山，插上了一面伟大的“IT—K”旗帜🚩！！！
 
 
-
-	<script>
-		var appid = 'YEvjDsUVtn2If65Vg4wiFWKr-gzGzoHsz',
-            appkey = 'ia0pmjptrDfmlPIhVCG7rUXW';	  
-        AnnieLeancloud(appid, appkey);         
-	</script>
-    
-
-	
-
-				</p>
-			</div>
-		</div>
-		
-		<div class="post" id="post">
-			<a class="post-cover" href="/2019/05/08/今天是个好日子/" title=" 今天是个好日子 ">
-				
-				<img class="lazy" src="/img/placeholder.jpg" data-src="/img/cart_cover.jpg">
-			</a>
-
-			<div class="post-text">
-				<p class="post-time">
-					五月 8日, 2019
-				</p>	
-				<h3 class="post-title" id="post-title-index">
-					<a href="/2019/05/08/今天是个好日子/" title="今天是个好日子">
-						<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
-						
-	<a href="/2019/05/08/今天是个好日子/" itemprop="url">
-		今天是个好日子
-	</a>
-
-					</a>
-				</h3>
-				<p class="post-content">
-					
-						傲娇插旗.jpg
-
-收到一条来自互联网界的广播Bibibibibi….(中二线接入中，频段ID：4399—2048)……
-
-2019年5月8日，一名江湖代...
-					
-				</p>
-				<p class="post-meta">
-					
-
-	
-    <span class="leancloud_visitors" id="/2019/05/08/今天是个好日子/_visitors" data-url="/2019/05/08/今天是个好日子/" data-title="今天是个好日子">
-       	<i class="fa fa-eye"></i>
-       	热度
-        <i class="leancloud_visitors_count" id="leancloud_visitors_count">0</i>
-    </span>
-    
-
-
-
-	
-    <span class="leancloud_likes" id="/2019/05/08/今天是个好日子/_likes" data-url="/2019/05/08/今天是个好日子/" data-title="今天是个好日子" rel="unlike">
-        <i class="fa fa-heart"></i>
-        喜欢
-        <i class="leancloud_likes_count" id="leancloud_likes_count">0</i>
-    </span>
-
-					
-
-	<!-- leancloud -->
-	<!--
-	时间：2018-11-27
-	描述：
-		文章访问量：visitors
-		文章喜欢量：likes	
-		文章排行榜：topNPost
-		其他得说明：
-			01-Cookie相关的函数 
-				https://blog.csdn.net/somehow1002/article/details/78511541（Author：somehow1002）
-			02-visitors相关的函数 
-				https://blog.csdn.net/u013553529/article/details/63357382（Author：爱博客大伯）
-				https://notes.doublemine.me/2015-10-21-为NexT主题添加文章阅读量统计功能.html（Author：夏末）
-			03-topNPost相关的函数
-				https://hoxis.github.io/hexo-next-read-rank.html（Author：hoxis）
-			04-likes相关的函数，
-				参考了01 & 02进行简单的设计与实现
--->
-
-
-
-	<script>
-		var appid = 'YEvjDsUVtn2If65Vg4wiFWKr-gzGzoHsz',
-            appkey = 'ia0pmjptrDfmlPIhVCG7rUXW';	  
-        AnnieLeancloud(appid, appkey);         
-	</script>
-    
-
-	
-
-				</p>
-			</div>
-		</div>
-		
-	</div>
-	
-	
-	<div id="pagination">
-		
-	</div>
-
-	
-
-</div>
-	
-
-		</main>
-
-		<!--footer-->
-		<footer>
-	<div class="social">
-		<ul>
-	
-		<li>
-			<a href="https://github.com/MrKolen/" target="_blank">
-				<i class="fa fa-github"></i>
-			</a>
-		</li>
-	
-		<li>
-			<a href="https://weibo.com/5390056729/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank">
-				<i class="fa fa-weibo"></i>
-			</a>
-		</li>
-	
-		<li>
-			<a href="/atom.xml" target="_blank">
-				<i class="fa fa-rss"></i>
-			</a>
-		</li>
-			
-</ul>
-
-	</div>
-		
-	<div class="copyright">
-		<p>
-			 
-				&copy;2019 - 2020, content by ✨ Kolen. All Rights Reserved.
-			
-			
-			
-
-	<!-- busuanzi -->
-	<!-- busuanzi -->
-
-		
-	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-	
-
-		<span id="busuanzi_container_site_pv">
-	    	本站总访问量<span id="busuanzi_value_site_pv"></span>次
-		</span>
-
-		<span id="busuanzi_container_site_uv">
-	  		本站访客数<span id="busuanzi_value_site_uv"></span>人次
-		</span>
-		
-	
-
-
-
-
-		</p>
-		<p>
-			<a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> Theme <a href="https://github.com/Sariay/hexo-theme-Annie" title="Annie" target="_blank" rel="noopener">Annie</a> by Sariay.
-			<a href="javascript:zh_tran('s');" class="zh_click" id="zh_click_s">简体</a> 
-			<a href="javascript:zh_tran('t');" class="zh_click" id="zh_click_t">繁體</a>				
-		</p>
-	</div>		
-</footer>
-		
-	<!-- set '1' to show motto in all pages! -->
-
-	<script src="/plugin/motto/motto.js"></script>
-	
-	<script type="text/javascript">
-		$(".motto").html( getMingYanContent() );
-	</script>	
-
-
-
-
-	<!--
-	时间：2018-10-3
-	描述：
-		插件名称：hexo-generator-search-zip
-		插件来源: https://github.com/SuperKieran/hexo-generator-search-zip
-		代码参考：https://github.com/SuperKieran/TKL/blob/master/layout/_partial/search.ejs(Include: js & css)	
--->
-<div class="popup search-popup local-search-popup">
-	<div class="local-search-container">
-		<span class="popup-btn-close">
-      		ESC
-   		</span>
-		<div class="local-search-header">
-			<div class="input-prompt">				
-			</div>
-			<input autocomplete="off" placeholder="Search..." type="text" id="local-search-input">
-		</div>
-		<div class="local-search-body">
-			<div id="local-search-output"></div>
-		</div>
-		<div class="local-search-footer">
-			<div class="topN-post">				
-				
-
-   
-	<div id="topN">
-		<div class="topN-title" data-title="热门文章"></div> 
-	</div>
-	
-    <script>
-        var appid = 'YEvjDsUVtn2If65Vg4wiFWKr-gzGzoHsz',
-            appkey = 'ia0pmjptrDfmlPIhVCG7rUXW',
-            limitCount = 10;
-        if( $('#topN').length ){
-            AV.initialize(appid, appkey);
-            var Counter = AV.Object.extend("Counter");  
-            topNPost(Counter, limitCount);
-        }
-    </script>
-   
-								
-			</div>
-		</div>
-	</div>
-</div>
-
-<script src="/plugin/search/ziploader.js"></script>
-<script src="/plugin/search/search.js"></script>
-
-<script type="text/javascript">
-	var search_path = 'search.json',
-		zip_Path = '/search.zip',
-		version_Path = '/searchVersion.txt',
-		input_Trigger = 'auto',
-		top_N = '2';
-
-	themeLocalSearch({
-		search_path, 
-		zip_Path, 
-		version_Path, 
-		input_Trigger, 
-		top_N
-	});
-</script>
-
-
-<!-- love effect -->
-
-	<script src="/plugin/love/love.js"></script>
-
-
-<!-- back to top -->
-
-	
-	<div id="totop">
-  		<a href="javascript:;" name="TOTOP" class="fa fa-arrow-up"></a>
-	</div>
-
-
-
-
-<!-- site analysis -->
-
-
-	<!-- site-analysis -->
-	
-	
-	
-	
-	
- 
-
-<script src="/plugin/vibrant/vibrant.js"></script>
-<script src="/plugin/chinese/chinese.js"></script>
-<script src="/plugin/imgLazyLoader/yall.min.js"></script>
-<script src="/plugin/imgResize/jquery.resizeimagetoparent.min.js"></script>
-<script src="/plugin/nicescroll/jquery.nicescroll.js"></script>
-<script src="/js/resizediv.js"></script>
-<script src="/js/main.js"></script>
-	</body>	
-</html>
+ ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span></div></nav></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"><div class="author-info__name">✨ Kolen</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length_num">3</div></a></div><div class="card-info-data-item is-center">      <a href="/tags/"><div class="headline">Tags</div><div class="length_num">3</div></a></div><div class="card-info-data-item is-center">     <a href="/categories/"><div class="headline">Categories</div><div class="length_num">1</div></a></div></div><div class="card-info-bookmark is-center"><a class="bookmark button--primary button--animated" id="bookmark-it" href="javascript:;" title="Add to bookmark" target="_self"><i class="fa fa-bookmark" aria-hidden="true"></i><span>Add to bookmark</span></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/MrKolen" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a><a class="social-icon" href="wujifan_hopeful@163.com" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a><a class="social-icon" href="/atom.xml" target="_blank"><i class="fa fa-rss" aria-hidden="true"></i></a></div></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fa fa-bullhorn card-announcement-animation" aria-hidden="true"></i><span>Announcement</span></div><div class="announcement_content">感谢访问本站，喜欢请收藏 ^_^</div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fa fa-history" aria-hidden="true"></i><span>Recent Post</span></div><div class="aside-recent-item"> <div class="aside-recent-post"><a href="/2020/02/14/深度学习01-文本预处理/"><div class="aside-post-cover"><img class="aside-post-bg lazyload" data-src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/default.png" onerror="this.onerror=null;this.src='/img/404.jpg'" title="深度学习01-文本预处理" alt="深度学习01-文本预处理"></div><div class="aside-post-title"><div class="aside-post_title" href="/2020/02/14/深度学习01-文本预处理/" title="深度学习01-文本预处理">深度学习01-文本预处理</div><time class="aside-post_meta post-meta__date">2020-02-14</time></div></a></div><div class="aside-recent-post"><a href="/2019/05/08/分享两首歌，无摘要/"><div class="aside-post-cover"><img class="aside-post-bg lazyload" data-src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/default.png" onerror="this.onerror=null;this.src='/img/404.jpg'" title="分享两首歌，无摘要" alt="分享两首歌，无摘要"></div><div class="aside-post-title"><div class="aside-post_title" href="/2019/05/08/分享两首歌，无摘要/" title="分享两首歌，无摘要">分享两首歌，无摘要</div><time class="aside-post_meta post-meta__date">2019-05-08</time></div></a></div><div class="aside-recent-post"><a href="/2019/05/08/今天是个好日子/"><div class="aside-post-cover"><img class="aside-post-bg lazyload" data-src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/default.png" onerror="this.onerror=null;this.src='/img/404.jpg'" title="今天是个好日子" alt="今天是个好日子"></div><div class="aside-post-title"><div class="aside-post_title" href="/2019/05/08/今天是个好日子/" title="今天是个好日子">今天是个好日子</div><time class="aside-post_meta post-meta__date">2019-05-08</time></div></a></div></div></div></div><div class="card-widget card-categories"><div class="card-content"><div class="item-headline"><i class="fa fa-folder-open" aria-hidden="true"></i><span>Categories</span></div><ul class="aside-category-item">       <li class="aside-category-list"><a class="aside-category-list_link" href="/categories/杂记/"><span class="aside-category-list_name">杂记</span><span class="aside-category-list_length">1</span></a></li></ul></div></div><div class="card-widget card-tags"><div class="card-content"><div class="item-headline"><i class="fa fa-tags" aria-hidden="true"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/建博大业/" style="font-size: 16px; color: #999">建博大业</a> <a href="/tags/心情/" style="font-size: 16px; color: #999">心情</a> <a href="/tags/文艺一下/" style="font-size: 16px; color: #999">文艺一下</a></div></div></div><div class="card-widget card-archives"><div class="card-content"><div class="item-headline"><i class="fa fa-archive" aria-hidden="true"></i><span>Archives</span></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/"><span class="archive-list-date">2020年02月</span><span class="archive-list-count">1</span></a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/"><span class="archive-list-date">2019年05月</span><span class="archive-list-count">2</span></a></li></ul></div></div><div class="card-widget card-webinfo"><div class="card-content"><div class="item-headline"><i class="fa fa-line-chart" aria-hidden="true"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="webinfo-article-name">Article :</div><div class="webinfo-article-count">3</div></div><div class="webinfo-item"><div class="webinfo-runtime-name">Run time :</div><div class="webinfo-runtime-count" id="webinfo-runtime-count" start_date="6/19/2019 00:00:00">     </div></div><div class="webinfo-item">      <div class="webinfo-site-uv-name">UV :</div><div class="webinfo-site-uv-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="webinfo-site-name">PV :</div><div class="webinfo-site-pv-count" id="busuanzi_value_site_pv"></div></div></div></div></div></div></div></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2020 By ✨ Kolen</div><div class="framework-info"><span>Driven </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="Traditional Chinese and Simplified Chinese Conversion" target="_self">简</a><i class="darkmode fa fa-moon-o" id="darkmode" title="Dark Mode"></i></div><div id="rightside-config-show"><div id="rightside_config" title="Setting"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-arrow-up" id="go-up" title="Back to top" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script id="canvas_nest" color="0,0,255" opacity="0.7" zindex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/js/canvas-nest.js"></script><script src="https://cdn.jsdelivr.net/npm/activate-power-mode/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true; 
+document.body.addEventListener('input', POWERMODE);
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js" async></script><script src="https://cdn.jsdelivr.net/npm/typed.js"></script><script>var typed = new Typed(".subtitle", {
+strings: '有人爱&#44;有事做&#44;有所期待&#44;日子就是幸福的,Someone to love&#44; something to do and expected&#44; what a happy life♥'.split(","),
+startDelay: 300,
+typeSpeed: 100,
+loop: true,
+backSpeed: 50
+});</script></body></html>

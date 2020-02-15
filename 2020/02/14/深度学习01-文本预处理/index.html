@@ -83,7 +83,7 @@ function activateLightMode(){
 <p><code>strip()</code>： 去掉前/后缀的空白字符，也就是空格、制表、换行符；<br>
 <code>lower()</code>: 把所有大写字符转换为小写；<br>
 <code>re.sub（‘正则表达式’，‘ ’，String）</code>: 正则表达式的替换函数。将String中将与正则表达式相匹配的字符串转换为空格；<br>
-<code>'[^a-z]+'</code>: <sup>表示“非”，</sup>a-z即为非小写字符，+表示字符串长度至少为1，所以整个表达的意思是所有的非小写字符构成非空字符串。</p>
+<code>'[^a-z]+'</code>: <code>^</code>表示“非”，<code>^a-z</code>即为非小写字符，<code>+</code>表示字符串长度至少为1，所以整个表达的意思是所有的非小写字符构成非空字符串。</p>
 <pre><code>import collections
 import re
 

@@ -2,7 +2,7 @@ import collections
 import re
 
 def read_time_machine():
-    with open('/home/kesci/input/timemachine7163/timemachine.txt', 'r') as f:
+    with open('/your file path', 'r') as f:
         lines = [re.sub('[^a-z]+', ' ', line.strip().lower()) for line in f]
     return lines
 
@@ -17,7 +17,7 @@ def tokenize(sentences, token='word'):
     elif token == 'char':
         return [list(sentence) for sentence in sentences]
     else:
-        print('ERROR: unkown token type '+token)
+        print('ERROR: unkown token type ' + token)
 
 tokens = tokenize(lines)
 tokens[0:2]
@@ -58,7 +58,7 @@ def count_corpus(sentences):
     return collections.Counter(tokens)  # 返回一个字典，记录每个词的出现次数
 
 
-vocab = Vocab(tokens)
+vocab = Vocab(tokens)  # 实例化类
 print(list(vocab.token_to_idx.items())[0:10])
 
 for i in range(8, 10):
@@ -68,11 +68,11 @@ for i in range(8, 10):
 text = "Mr. Chen doesn't agree with my suggestion."
 
 import spacy
-nlp = spacy.load('en_core_web_sm')
+nlp = spacy.load('en_core_web_sm')  # 选择一种language 
 doc = nlp(text)
 print([token.text for token in doc])
 
 from nltk.tokenize import word_tokenize
 from nltk import data
-data.path.append('/home/kesci/input/nltk_data3784/nltk_data')
+data.path.append('../nltk_data')
 print(word_tokenize(text))

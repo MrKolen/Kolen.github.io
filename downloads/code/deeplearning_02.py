@@ -1,6 +1,6 @@
 def load_data_jay_lyrics():
     # 读取数据集
-    with open('/home/kesci/input/jaychou_lyrics4703/jaychou_lyrics.txt') as f:
+    with open('../jaychou_lyrics.txt') as f:
         corpus_chars = f.read()
     corpus_chars = corpus_chars.replace('\n', ' ').replace('\r', ' ')
     corpus_chars = corpus_chars[0:10000]

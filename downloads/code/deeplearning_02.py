@@ -53,4 +53,4 @@ test_seq = list(range(100))
 for X, Y in data_iter_random(test_seq, batch_size=2, num_steps=6):
     print('随机采样测试:', '\nX: ', X, '\nY:', Y, '\n')
 for X, Y in data_iter_consecutive(test_seq, batch_size=2, num_steps=6):
-    print('相邻随机采样测试:', '\nX: ', X, '\nY:', Y, '\n')
+    print('相邻采样测试:', '\nX: ', X, '\nY:', Y, '\n')

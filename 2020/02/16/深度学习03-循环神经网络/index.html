@@ -89,7 +89,7 @@ function activateLightMode(){
 <li>即便在不同时间步，循环神经网络也始终使用这些模型参数。因此，循环神经网络模型参数的数量不随时间步的增加而增长；</li>
 <li>批量训练的过程中，参数是以批为单位更新的，每个批次内模型的参数都是一样的；</li>
 <li>RNN通过不断循环使用同一组参数来应对不同长度的序列，即网络参数数量与输入序列长度无关；</li>
-<li>隐藏状态<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>H</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">H_{t}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.08125em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>的值依赖于$$H_{1},…,H_{t-1}$$,故不能并行计算。</li>
+<li>隐藏状态<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>H</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">H_{t}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.08125em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>的值依赖于<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>H</mi><mn>1</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><msub><mi>H</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">H_{1},...,H_{t-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.891661em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.08125em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:-0.08125em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span></span></span></span>,故不能并行计算。</li>
 </ol>
 </blockquote>
 <h1 id="diy实现rnn"><a class="markdownIt-Anchor" href="#diy实现rnn"></a> DIY实现RNN</h1>
@@ -146,7 +146,7 @@ function activateLightMode(){
 <p>引入<a href="https://mrkolen.github.io/2020/02/16/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A002-N-gram%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/#%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E5%81%87%E8%AE%BE%E4%B8%8En-gram">上篇文章</a>对时序数据采用不同采样方法。</p>
 <blockquote>
 <p>注意：不同采样方法隐藏状态初始化不同<br>
-相邻采样的前后两个批量的数据在在时间步上是连续的，所以模型会使用上一个批量的隐藏状态初始化当前的隐藏状态，表现形式就是不需要在一个epoch的每次迭代时随机初始化隐藏状态.<br>
+相邻采样的前后两个批量的数据在在时间步上是连续的，所以模型会使用上一个批量的隐藏状态初始化当前的隐藏状态，表现形式就是不需要在一个epoch的每次迭代时随机初始化隐藏状态。<br>
 假如没有<code>detach_()</code>的操作，每次迭代之后的输出是一个叶子节点，并且该叶子节点的<code>requires_grad</code> = True(从上面的计算图就可以看出)，也就意味着两次或者说多次的迭代，计算图一直都是连着的，因为没有遇到梯度计算的结束位置，这样将会一直持续到下一次隐藏状态的初始化。所以这将会导致计算图非常的大，进而导致计算开销非常大。<br>
 反之，每次将参数<code>detach_()</code>出来，其实就是相当于每次迭代之后虽然是使用上一次迭代的隐藏状态，只不过我们希望重新开始，具体的操作就是把上一次的输出节点的参数<code>requires_grad</code>设置为False的叶子节点。</p>
 </blockquote>
@@ -159,9 +159,9 @@ function activateLightMode(){
 <blockquote>
 <p>epoch 50, perplexity 70.843629, time 0.60 sec<br>
 喜欢 我不要再想 我不要再想 我不要再想 我不要再想 我不要再想 我不要再想 我不要再想 我不要再想 我<br>
-分手 我不要再想 我不要再想 我不要再想 我不要再想 我不要再想 我不要再想 我不要再想 我不要再想 我</p>
-<p>…</p>
-<p>epoch 250, perplexity 1.301393, time 0.60 sec<br>
+分手 我不要再想 我不要再想 我不要再想 我不要再想 我不要再想 我不要再想 我不要再想 我不要再想 我<br>
+…<br>
+epoch 250, perplexity 1.301393, time 0.60 sec<br>
 喜欢 一只在娘妥 依话就停驳 别底在角落 不爽就反驳 到底拽什么 懂不懂篮球 有种不要走 三对三斗牛 三<br>
 分手 那只么 一步两步三颗四步望著天 看星星 一颗两颗三颗四颗 连成线一著背默默许下心愿 看远方的星是否</p>
 </blockquote>
@@ -170,9 +170,9 @@ function activateLightMode(){
 <blockquote>
 <p>epoch 50, perplexity 61.914999, time 0.61 sec<br>
 喜欢 我想要这 你谁我有 你想一直 我想一空 我想你的可爱女人 坏坏我有 你谁我有 你想一直 我想一空<br>
-分手 我想要这 你谁我有 你想一直 我想一空 我想你的可爱女人 坏坏我有 你谁我有 你想一直 我想一空</p>
-<p>…</p>
-<p>epoch 250, perplexity 1.160371, time 0.60 sec<br>
+分手 我想要这 你谁我有 你想一直 我想一空 我想你的可爱女人 坏坏我有 你谁我有 你想一直 我想一空<br>
+…<br>
+epoch 250, perplexity 1.160371, time 0.60 sec<br>
 喜欢 一候在一只悲的 我有你的有模有样 什么兵器最喜欢 双截棍柔中带刚 想要去河南嵩山 学少林跟武当 快<br>
 分手 一候她 如果我都没有错亏我叫你一声爸  爸我回来了 不要再这样打我妈妈你以你当榜样  好多的假像</p>
 </blockquote>
@@ -208,9 +208,9 @@ function activateLightMode(){
 <blockquote>
 <p>epoch 50, perplexity 1.015603, time 0.37 sec<br>
 喜欢 人潮中你只属于我的那画面 经过苏美女神身边 我以女神之名许愿 思念像底格里斯河般的漫延 当古文明只<br>
-分手 一切当年 家  你想大声 布 对你依依不舍 连隔壁邻居都猜到我现在的感受 河边的风 在吹着头发飘动</p>
-<p>…</p>
-<p>epoch 250, perplexity 1.006805, time 0.37 sec<br>
+分手 一切当年 家  你想大声 布 对你依依不舍 连隔壁邻居都猜到我现在的感受 河边的风 在吹着头发飘动<br>
+…<br>
+epoch 250, perplexity 1.006805, time 0.37 sec<br>
 喜欢 在潮中你融化在宇宙里 我每天每天每天在想想想想著你 这样的甜蜜 让我开始乡相信命运 感谢地心引力<br>
 分手 那回忆 的路上 时间变好慢 老街坊 小弄堂 是属于那年代白墙黑瓦的淡淡的忧伤 消失的 旧时光 一九</p>
 </blockquote>

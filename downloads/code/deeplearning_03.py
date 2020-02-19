@@ -2,10 +2,10 @@ import torch
 import torch.nn as nn
 import time
 import math
+import deeplearning_02 as dl_2
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 # 导入歌词数据
-(corpus_indices, char_to_idx, idx_to_char, vocab_size) = d2l.load_data_jay_lyrics()
-
+(corpus_indices, char_to_idx, idx_to_char, vocab_size) = dl_2.load_data_jay_lyrics()
 
 def one_hot(x, n_class, dtype=torch.float32):
     result = torch.zeros(x.shape[0], n_class, dtype=dtype, device=x.device)  # shape: (n, n_class)

@@ -143,10 +143,10 @@ function activateLightMode(){
 </ul>
 <p>可见，任何一个有效模型的困惑度必须小于类别个数。因此，在此处困惑度必须小于词典大小<code>vocab_size</code>。</p>
 <h3 id="训练和预测函数"><a class="markdownIt-Anchor" href="#训练和预测函数"></a> 训练和预测函数</h3>
-<p>引入<a href="https://mrkolen.github.io/2020/02/16/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A002-N-gram%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/#%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E5%81%87%E8%AE%BE%E4%B8%8En-gram">上篇文章</a>对时序数据采用不同采样方法。</p>
+<p>引入<a href="https://mrkolen.github.io/2020/02/16/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A002-N-gram%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/#%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E5%81%87%E8%AE%BE%E4%B8%8En-gram">上篇文章</a>中对时序数据采用随机采样和相邻采样方法。</p>
 <blockquote>
 <p>注意：不同采样方法隐藏状态初始化不同<br>
-相邻采样的前后两个批量的数据在在时间步上是连续的，所以模型会使用上一个批量的隐藏状态初始化当前的隐藏状态，表现形式就是不需要在一个epoch的每次迭代时随机初始化隐藏状态。<br>
+相邻采样的前后两个批量的数据在时间步上是连续的，所以模型会使用上一个批量的隐藏状态初始化当前的隐藏状态，表现形式就是不需要在一个epoch的每次迭代时随机初始化隐藏状态。<br>
 假如没有<code>detach_()</code>的操作，每次迭代之后的输出是一个叶子节点，并且该叶子节点的<code>requires_grad</code> = True(从上面的计算图就可以看出)，也就意味着两次或者说多次的迭代，计算图一直都是连着的，因为没有遇到梯度计算的结束位置，这样将会一直持续到下一次隐藏状态的初始化。所以这将会导致计算图非常的大，进而导致计算开销非常大。<br>
 反之，每次将参数<code>detach_()</code>出来，其实就是相当于每次迭代之后虽然是使用上一次迭代的隐藏状态，只不过我们希望重新开始，具体的操作就是把上一次的输出节点的参数<code>requires_grad</code>设置为False的叶子节点。</p>
 </blockquote>

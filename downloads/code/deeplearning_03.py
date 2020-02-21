@@ -73,9 +73,9 @@ def train_and_predict_rnn(rnn, get_params, init_rnn_state, num_hiddens,
                           lr, clipping_theta, batch_size, pred_period,
                           pred_len, prefixes):
     if is_random_iter:
-        data_iter_fn = d2l.data_iter_random
+        data_iter_fn = dl_2.data_iter_random
     else:
-        data_iter_fn = d2l.data_iter_consecutive
+        data_iter_fn = dl_2.data_iter_consecutive
     params = get_params()
     loss = nn.CrossEntropyLoss()
 
@@ -108,7 +108,7 @@ def train_and_predict_rnn(rnn, get_params, init_rnn_state, num_hiddens,
                     param.grad.data.zero_()
             l.backward()
             grad_clipping(params, clipping_theta, device)  # 裁剪梯度
-            d2l.sgd(params, lr, 1)  # 因为误差已经取过均值，梯度不用再做平均
+            dl_2.sgd(params, lr, 1)  # 因为误差已经取过均值，梯度不用再做平均
             l_sum += l.item() * y.shape[0]
             n += y.shape[0]
 
@@ -179,7 +179,7 @@ def train_and_predict_rnn_pytorch(model, num_hiddens, vocab_size, device,
     model.to(device)
     for epoch in range(num_epochs):
         l_sum, n, start = 0.0, 0, time.time()
-        data_iter = d2l.data_iter_consecutive(corpus_indices, batch_size, num_steps, device) # 相邻采样
+        data_iter = dl_2.data_iter_consecutive(corpus_indices, batch_size, num_steps, device) # 相邻采样
         state = None
         for X, Y in data_iter:
             if state is not None:
